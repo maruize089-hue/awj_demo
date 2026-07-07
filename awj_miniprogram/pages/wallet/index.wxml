@@ -1,0 +1,33 @@
+<view class="wallet-container">
+  <view class="wallet-header">
+    <text class="wallet-title">我的钱包</text>
+    <text class="wallet-balance">¥{{balance}}</text>
+    <text class="wallet-tip">余额可用于支付订单</text>
+  </view>
+  
+  <view class="wallet-actions">
+    <button class="action-btn" bindtap="recharge">充值</button>
+    <button class="action-btn" bindtap="withdraw">提现</button>
+  </view>
+  
+  <view class="record-section">
+    <view class="section-header">
+      <text class="section-title">账单记录</text>
+    </view>
+    <view class="record-list">
+      <view class="record-item" wx:for="{{records}}" wx:key="id">
+        <view class="record-icon">{{getRecordIcon(item.type)}}</view>
+        <view class="record-info">
+          <text class="record-name">{{getRecordName(item.type)}}</text>
+          <text class="record-time">{{item.createTime}}</text>
+        </view>
+        <text class="record-amount" style="color: {{item.type === 'RECHARGE' ? '#66cc66' : '#ff6b35'}}">
+          {{item.type === 'RECHARGE' ? '+' : '-'}}¥{{item.amount}}
+        </text>
+      </view>
+      <view class="empty-tip" wx:if="{{records.length === 0}}">
+        <text>暂无账单记录</text>
+      </view>
+    </view>
+  </view>
+</view>

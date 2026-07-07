@@ -1,0 +1,138 @@
+.order-list-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.tabs {
+  display: flex;
+  background: #ffffff;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 25rpx 0;
+  font-size: 28rpx;
+  color: #666666;
+  position: relative;
+}
+
+.tab-item.active {
+  color: #ff6b35;
+  font-weight: 600;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background: #ff6b35;
+  border-radius: 2rpx;
+}
+
+.order-list {
+  padding: 20rpx;
+}
+
+.order-card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.order-no {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.order-status {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.order-items {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20rpx;
+}
+
+.order-item {
+  width: 120rpx;
+  margin-right: 15rpx;
+  margin-bottom: 15rpx;
+}
+
+.item-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
+}
+
+.item-name {
+  font-size: 22rpx;
+  color: #666666;
+  display: block;
+  margin-top: 5rpx;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20rpx;
+  border-top: 2rpx solid #f5f5f5;
+}
+
+.order-total {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.total-price {
+  font-size: 32rpx;
+  color: #ff6b35;
+  font-weight: 600;
+}
+
+.total-price::before {
+  content: '¥';
+  font-size: 24rpx;
+}
+
+.order-actions {
+  display: flex;
+}
+
+.action-btn {
+  width: 140rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  background: #ff6b35;
+  color: #ffffff;
+  border-radius: 32rpx;
+  font-size: 26rpx;
+  margin-left: 15rpx;
+}
+
+.action-btn.secondary {
+  background: #f5f5f5;
+  color: #666666;
+}
+
+.empty-tip {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999999;
+}

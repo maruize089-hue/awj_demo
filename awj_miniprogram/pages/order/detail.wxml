@@ -1,0 +1,79 @@
+<scroll-view class="order-detail-container" scroll-y>
+  <view class="status-section">
+    <text class="status-text" style="color: {{getStatusColor(order.status)}}">{{getStatusText(order.status)}}</text>
+    <text class="order-no">订单号：{{order.orderNo}}</text>
+    <text class="create-time">下单时间：{{order.createTime}}</text>
+  </view>
+  
+  <view class="address-section">
+    <view class="address-icon">📍</view>
+    <view class="address-info">
+      <view class="address-header">
+        <text class="address-name">{{order.address && order.address.receiver ? order.address.receiver : ''}}</text>
+        <text class="address-phone">{{order.address && order.address.phone ? order.address.phone : ''}}</text>
+      </view>
+      <text class="address-detail">{{order.address ? (order.address.province || '') : ''}}{{order.address ? (order.address.city || '') : ''}}{{order.address ? (order.address.district || '') : ''}}{{order.address ? (order.address.detail || '') : ''}}</text>
+    </view>
+  </view>
+  
+  <view class="service-time-section" wx:if="{{order.serviceTime}}">
+    <text class="time-label">预约服务时间</text>
+    <text class="time-value">{{order.serviceTime}}</text>
+  </view>
+  
+  <view class="item-section">
+    <view class="item-card" wx:for="{{order.items}}" wx:key="id">
+      <image class="item-image" src="{{item.image}}" mode="aspectFill" />
+      <view class="item-info">
+        <text class="item-name ellipsis-2">{{item.name}}</text>
+        <text class="item-spec" wx:if="{{item.spec}}">{{item.spec}}</text>
+        <view class="item-bottom">
+          <text class="item-price">{{item.price}}</text>
+          <text class="item-quantity">x{{item.quantity}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="remark-section" wx:if="{{order.remark}}">
+    <text class="remark-label">订单备注</text>
+    <text class="remark-value">{{order.remark}}</text>
+  </view>
+  
+  <view class="summary-section">
+    <view class="summary-row">
+      <text class="summary-label">商品金额</text>
+      <text class="summary-value">{{order.subtotal}}</text>
+    </view>
+    <view class="summary-row" wx:if="{{order.couponAmount}}">
+      <text class="summary-label">优惠券</text>
+      <text class="summary-value discount">-¥{{order.couponAmount}}</text>
+    </view>
+    <view class="summary-row">
+      <text class="summary-label">运费</text>
+      <text class="summary-value">{{order.shippingFee}}</text>
+    </view>
+    <view class="summary-row total">
+      <text class="summary-label">实付金额</text>
+      <text class="summary-total">{{order.totalAmount}}</text>
+    </view>
+  </view>
+  
+  <view class="pay-info" wx:if="{{order.payTime}}">
+    <text class="pay-label">支付时间：{{order.payTime}}</text>
+    <text class="pay-label">支付方式：{{order.payType === 'WECHAT' ? '微信支付' : '余额支付'}}</text>
+  </view>
+</scroll-view>
+
+<view class="order-footer" wx:if="{{order.status === 'PENDING'}}">
+  <button class="action-btn secondary" bindtap="cancelOrder">取消订单</button>
+  <button class="action-btn primary" bindtap="payOrder">立即支付</button>
+</view>
+
+<view class="order-footer" wx:if="{{order.status === 'PAID'}}">
+  <button class="action-btn primary" bindtap="confirmOrder">确认完成</button>
+</view>
+
+<view class="order-footer" wx:if="{{order.status === 'COMPLETED' && !hasReview}}">
+  <button class="action-btn primary" bindtap="writeReview">去评价</button>
+</view>

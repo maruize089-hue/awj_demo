@@ -1,0 +1,81 @@
+<view class="profile-container">
+  <view class="profile-header">
+    <view class="user-info">
+      <image class="avatar" src="{{userInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill" />
+      <view class="user-detail">
+        <text class="username">{{userInfo.username || '未登录'}}</text>
+        <text class="user-role">{{userInfo.role === 'ADMIN' ? '管理员' : '普通用户'}}</text>
+      </view>
+    </view>
+    <view class="login-btn" bindtap="goLogin" wx:if="{{!isLoggedIn}}">
+      <text>登录</text>
+    </view>
+    <view class="logout-btn" bindtap="logout" wx:else>
+      <text>退出</text>
+    </view>
+  </view>
+  
+  <view class="order-section">
+    <view class="section-header">
+      <text class="section-title">我的订单</text>
+      <text class="section-more">全部订单 ›</text>
+    </view>
+    <view class="order-tabs">
+      <view class="order-tab" bindtap="goToOrders" data-status="PENDING">
+        <text class="tab-icon">📦</text>
+        <text class="tab-text">待支付</text>
+        <text class="tab-badge" wx:if="{{orderStats.pending > 0}}">{{orderStats.pending}}</text>
+      </view>
+      <view class="order-tab" bindtap="goToOrders" data-status="PAID">
+        <text class="tab-icon">✅</text>
+        <text class="tab-text">待服务</text>
+        <text class="tab-badge" wx:if="{{orderStats.paid > 0}}">{{orderStats.paid}}</text>
+      </view>
+      <view class="order-tab" bindtap="goToOrders" data-status="COMPLETED">
+        <text class="tab-icon">⭐</text>
+        <text class="tab-text">已完成</text>
+      </view>
+      <view class="order-tab" bindtap="goToOrders" data-status="REFUNDED">
+        <text class="tab-icon">💸</text>
+        <text class="tab-text">已退款</text>
+      </view>
+    </view>
+  </view>
+  
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goToAddress">
+      <text class="menu-icon">🏠</text>
+      <text class="menu-text">收货地址</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToCoupons">
+      <text class="menu-icon">🎫</text>
+      <text class="menu-text">优惠券</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToWallet">
+      <text class="menu-icon">💰</text>
+      <text class="menu-text">钱包</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToFavorites">
+      <text class="menu-icon">❤️</text>
+      <text class="menu-text">我的收藏</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToReviews">
+      <text class="menu-icon">📝</text>
+      <text class="menu-text">我的评价</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToHelp">
+      <text class="menu-icon">❓</text>
+      <text class="menu-text">帮助中心</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+  
+  <view class="version-info">
+    <text>社区服务商城 v1.0.0</text>
+  </view>
+</view>

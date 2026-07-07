@@ -1,0 +1,286 @@
+CREATE DATABASE IF NOT EXISTS community_mall DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE community_mall;
+
+CREATE TABLE IF NOT EXISTS awj_user (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    email VARCHAR(100),
+    avatar VARCHAR(255),
+    real_name VARCHAR(50),
+    role VARCHAR(20) DEFAULT 'USER',
+    status INT DEFAULT 1,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_merchant (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL,
+    logo VARCHAR(255),
+    phone VARCHAR(20),
+    address VARCHAR(255),
+    description TEXT,
+    status INT DEFAULT 0,
+    audit_time DATETIME,
+    audit_remark VARCHAR(255),
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_category (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    parent_id BIGINT DEFAULT 0,
+    type VARCHAR(20) DEFAULT 'PRODUCT',
+    sort_order INT DEFAULT 0,
+    status INT DEFAULT 1,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_product (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    merchant_id BIGINT,
+    category_id BIGINT,
+    name VARCHAR(200) NOT NULL,
+    description TEXT,
+    image VARCHAR(255),
+    total_stock INT DEFAULT 0,
+    price DECIMAL(10,2) NOT NULL,
+    original_price DECIMAL(10,2),
+    status INT DEFAULT 1,
+    sales INT DEFAULT 0,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_product_spec (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    product_id BIGINT NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_product_spec_value (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    spec_id BIGINT NOT NULL,
+    value VARCHAR(50) NOT NULL,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_product_sku (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    product_id BIGINT,
+    sku_code VARCHAR(50) UNIQUE,
+    spec_values VARCHAR(200),
+    price DECIMAL(10,2) NOT NULL,
+    stock INT DEFAULT 0,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_service (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    merchant_id BIGINT,
+    category_id BIGINT,
+    name VARCHAR(200) NOT NULL,
+    description TEXT,
+    image VARCHAR(255),
+    price DECIMAL(10,2) NOT NULL,
+    original_price DECIMAL(10,2),
+    duration INT,
+    sales INT DEFAULT 0,
+    status INT DEFAULT 1,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_address (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    receiver_name VARCHAR(50) NOT NULL,
+    receiver_phone VARCHAR(20) NOT NULL,
+    province VARCHAR(50),
+    city VARCHAR(50),
+    district VARCHAR(50),
+    detail VARCHAR(255) NOT NULL,
+    is_default INT DEFAULT 0,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_cart (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    product_id BIGINT,
+    sku_id BIGINT,
+    service_id BIGINT,
+    quantity INT DEFAULT 1,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_product_order (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    order_no VARCHAR(50) NOT NULL UNIQUE,
+    user_id BIGINT NOT NULL,
+    order_type VARCHAR(20) DEFAULT 'PRODUCT',
+    merchant_id BIGINT,
+    address_id BIGINT,
+    subtotal DECIMAL(10,2) NOT NULL,
+    shipping_fee DECIMAL(10,2) DEFAULT 0,
+    coupon_amount DECIMAL(10,2) DEFAULT 0,
+    total_amount DECIMAL(10,2) NOT NULL,
+    pay_type VARCHAR(20),
+    status VARCHAR(20) DEFAULT 'PENDING',
+    remark TEXT,
+    service_time VARCHAR(50),
+    pay_time DATETIME,
+    complete_time DATETIME,
+    cancel_time DATETIME,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_product_order_item (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    order_id BIGINT NOT NULL,
+    product_id BIGINT,
+    sku_id BIGINT,
+    name VARCHAR(200) NOT NULL,
+    spec_values VARCHAR(200),
+    price DECIMAL(10,2) NOT NULL,
+    quantity INT NOT NULL,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_service_order (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    order_no VARCHAR(50) NOT NULL UNIQUE,
+    user_id BIGINT NOT NULL,
+    merchant_id BIGINT NOT NULL,
+    service_id BIGINT NOT NULL,
+    address_id BIGINT NOT NULL,
+    total_amount DECIMAL(10,2) NOT NULL,
+    service_time DATETIME,
+    status VARCHAR(20) DEFAULT 'PENDING',
+    pay_time DATETIME,
+    confirm_time DATETIME,
+    start_time DATETIME,
+    finish_time DATETIME,
+    cancel_time DATETIME,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_coupon (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    min_amount DECIMAL(10,2) DEFAULT 0,
+    start_time DATETIME NOT NULL,
+    end_time DATETIME NOT NULL,
+    status VARCHAR(20) DEFAULT 'ACTIVE',
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_user_coupon (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    coupon_id BIGINT NOT NULL,
+    status VARCHAR(20) DEFAULT 'AVAILABLE',
+    used_time DATETIME,
+    used_order_no VARCHAR(50),
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_favorite (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    product_id BIGINT,
+    service_id BIGINT,
+    type VARCHAR(20) DEFAULT 'PRODUCT',
+    name VARCHAR(100),
+    image VARCHAR(255),
+    price DECIMAL(10,2),
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_evaluation (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    order_id BIGINT,
+    order_no VARCHAR(50),
+    order_type VARCHAR(20),
+    user_id BIGINT NOT NULL,
+    merchant_id BIGINT NOT NULL,
+    product_id BIGINT,
+    service_id BIGINT,
+    rating INT DEFAULT 5,
+    content TEXT,
+    images VARCHAR(500),
+    status INT DEFAULT 1,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_banner (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100),
+    image VARCHAR(255),
+    link VARCHAR(255),
+    sort_order INT DEFAULT 0,
+    status INT DEFAULT 1,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_message (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    content TEXT,
+    type VARCHAR(20) DEFAULT 'SYSTEM',
+    is_read INT DEFAULT 0,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_wallet (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL UNIQUE,
+    balance DECIMAL(10,2) DEFAULT 0,
+    frozen_amount DECIMAL(10,2) DEFAULT 0,
+    status INT DEFAULT 1,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_wallet_record (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    type VARCHAR(20) NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    balance DECIMAL(10,2),
+    balance_before DECIMAL(10,2) DEFAULT 0,
+    balance_after DECIMAL(10,2) DEFAULT 0,
+    remark VARCHAR(255),
+    description VARCHAR(255),
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS awj_refund (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    order_no VARCHAR(50) NOT NULL,
+    order_type VARCHAR(20) NOT NULL,
+    user_id BIGINT NOT NULL,
+    merchant_id BIGINT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    reason VARCHAR(500),
+    images VARCHAR(500),
+    status VARCHAR(20) DEFAULT 'APPLYING',
+    audit_time DATETIME,
+    audit_remark VARCHAR(255),
+    refund_time DATETIME,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);

@@ -1,0 +1,17 @@
+<view class="favorite-container">
+  <view class="favorite-list">
+    <view class="favorite-item" wx:for="{{favorites}}" wx:key="id">
+      <image class="favorite-image" src="{{item.image}}" mode="aspectFill" bindtap="goToDetail" data-id="{{item.productId}}" data-type="{{item.type}}" />
+      <view class="favorite-info">
+        <text class="favorite-name ellipsis-2">{{item.name}}</text>
+        <text class="favorite-price">{{item.price}}</text>
+      </view>
+      <text class="favorite-remove" bindtap="removeFavorite" data-id="{{item.id}}">删除</text>
+    </view>
+    
+    <view class="empty-tip" wx:if="{{favorites.length === 0}}">
+      <text class="empty-icon">❤️</text>
+      <text class="empty-text">暂无收藏</text>
+    </view>
+  </view>
+</view>

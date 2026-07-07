@@ -1,0 +1,67 @@
+.help-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.help-list {
+  background: #ffffff;
+  margin: 20rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.help-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.help-item:last-child {
+  border-bottom: none;
+}
+
+.help-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+}
+
+.help-title {
+  flex: 1;
+  font-size: 30rpx;
+  color: #333333;
+}
+
+.help-arrow {
+  font-size: 36rpx;
+  color: #cccccc;
+}
+
+.contact-section {
+  background: #ffffff;
+  margin: 20rpx;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  text-align: center;
+}
+
+.contact-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.contact-phone {
+  font-size: 36rpx;
+  color: #ff6b35;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.contact-time {
+  font-size: 26rpx;
+  color: #999999;
+}

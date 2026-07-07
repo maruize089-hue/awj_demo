@@ -1,0 +1,279 @@
+.order-create-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: 140rpx;
+}
+
+.address-section {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 30rpx;
+  margin-bottom: 10rpx;
+}
+
+.address-icon {
+  font-size: 48rpx;
+  margin-right: 20rpx;
+}
+
+.address-info {
+  flex: 1;
+}
+
+.address-header {
+  display: flex;
+  margin-bottom: 10rpx;
+}
+
+.address-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-right: 20rpx;
+}
+
+.address-phone {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.address-detail {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.address-empty {
+  flex: 1;
+  font-size: 28rpx;
+  color: #999999;
+}
+
+.address-arrow {
+  font-size: 36rpx;
+  color: #cccccc;
+}
+
+.item-section {
+  background: #ffffff;
+  padding: 20rpx;
+  margin-bottom: 10rpx;
+}
+
+.item-card {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.item-card:last-child {
+  margin-bottom: 0;
+}
+
+.item-image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+  margin-right: 20rpx;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-name {
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.item-spec {
+  font-size: 24rpx;
+  color: #999999;
+  margin: 10rpx 0;
+  display: block;
+}
+
+.item-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.item-price {
+  font-size: 30rpx;
+  color: #ff6b35;
+  font-weight: 600;
+}
+
+.item-price::before {
+  content: '¥';
+  font-size: 22rpx;
+}
+
+.item-quantity {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.remark-section, .service-time-section, .coupon-section {
+  background: #ffffff;
+  padding: 30rpx;
+  margin-bottom: 10rpx;
+}
+
+.remark-label, .time-label, .coupon-label {
+  font-size: 28rpx;
+  color: #333333;
+  margin-bottom: 15rpx;
+  display: block;
+}
+
+.remark-input {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+
+.time-picker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.time-picker:last-child {
+  border-bottom: none;
+}
+
+.time-picker text {
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.picker-arrow {
+  font-size: 32rpx;
+  color: #cccccc;
+}
+
+.coupon-section {
+  display: flex;
+  align-items: center;
+}
+
+.coupon-label {
+  margin-bottom: 0;
+}
+
+.coupon-info {
+  flex: 1;
+  text-align: right;
+}
+
+.coupon-value {
+  font-size: 28rpx;
+  color: #ff6b35;
+}
+
+.coupon-empty {
+  font-size: 28rpx;
+  color: #999999;
+}
+
+.coupon-arrow {
+  font-size: 36rpx;
+  color: #cccccc;
+}
+
+.summary-section {
+  background: #ffffff;
+  padding: 30rpx;
+  margin-bottom: 10rpx;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15rpx;
+}
+
+.summary-row:last-child {
+  margin-bottom: 0;
+}
+
+.summary-label {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.summary-value {
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.summary-value.discount {
+  color: #ff6b35;
+}
+
+.summary-row.total {
+  padding-top: 15rpx;
+  border-top: 2rpx solid #f5f5f5;
+}
+
+.summary-total {
+  font-size: 36rpx;
+  color: #ff6b35;
+  font-weight: 600;
+}
+
+.summary-total::before {
+  content: '¥';
+  font-size: 26rpx;
+}
+
+.order-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 20rpx 30rpx;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.footer-left {
+  display: flex;
+  align-items: baseline;
+}
+
+.total-label {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.total-price {
+  font-size: 44rpx;
+  color: #ff6b35;
+  font-weight: 600;
+}
+
+.total-price::before {
+  content: '¥';
+  font-size: 32rpx;
+}
+
+.submit-btn {
+  width: 240rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #ff6b35;
+  color: #ffffff;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+}

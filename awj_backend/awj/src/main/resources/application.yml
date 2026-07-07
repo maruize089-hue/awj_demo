@@ -1,0 +1,43 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: awj
+  datasource:
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/community_mall?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: ${REDIS_DATABASE:0}
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+
+jwt:
+  secret: ${JWT_SECRET:community-mall-jwt-secret-key-2026}
+  expiration: ${JWT_EXPIRATION:604800000}
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+wx:
+  pay:
+    app-id: ${WX_PAY_APP_ID:}
+    mch-id: ${WX_PAY_MCH_ID:}
+    api-key: ${WX_PAY_API_KEY:}

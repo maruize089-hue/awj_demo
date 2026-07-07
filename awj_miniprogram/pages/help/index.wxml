@@ -1,0 +1,40 @@
+<view class="help-container">
+  <view class="help-list">
+    <view class="help-item" bindtap="showHelp" data-title="如何注册登录" data-content="打开小程序后，点击右下角'我的'，然后点击'登录'按钮，可以选择微信快捷登录或输入用户名密码登录。">
+      <text class="help-icon">🔐</text>
+      <text class="help-title">如何注册登录</text>
+      <text class="help-arrow">›</text>
+    </view>
+    <view class="help-item" bindtap="showHelp" data-title="如何下单购物" data-content="浏览商品或服务，点击商品进入详情页，选择'加入购物车'或'立即购买'，填写收货地址后提交订单并支付。">
+      <text class="help-icon">🛒</text>
+      <text class="help-title">如何下单购物</text>
+      <text class="help-arrow">›</text>
+    </view>
+    <view class="help-item" bindtap="showHelp" data-title="如何支付订单" data-content="订单提交后，可以选择微信支付或余额支付。余额支付需要先充值。">
+      <text class="help-icon">💳</text>
+      <text class="help-title">如何支付订单</text>
+      <text class="help-arrow">›</text>
+    </view>
+    <view class="help-item" bindtap="showHelp" data-title="如何预约服务" data-content="选择服务类商品，在下单页面选择预约日期和时间，提交订单后等待服务人员上门。">
+      <text class="help-icon">📅</text>
+      <text class="help-title">如何预约服务</text>
+      <text class="help-arrow">›</text>
+    </view>
+    <view class="help-item" bindtap="showHelp" data-title="如何使用优惠券" data-content="在'我的'页面点击'优惠券'查看可用优惠券，下单时选择优惠券即可抵扣金额。">
+      <text class="help-icon">🎫</text>
+      <text class="help-title">如何使用优惠券</text>
+      <text class="help-arrow">›</text>
+    </view>
+    <view class="help-item" bindtap="showHelp" data-title="如何申请退款" data-content="订单完成后，如有问题可以联系客服申请退款。退款将原路返回。">
+      <text class="help-icon">💸</text>
+      <text class="help-title">如何申请退款</text>
+      <text class="help-arrow">›</text>
+    </view>
+  </view>
+  
+  <view class="contact-section">
+    <text class="contact-title">联系客服</text>
+    <text class="contact-phone">客服热线：400-123-4567</text>
+    <text class="contact-time">服务时间：9:00-21:00</text>
+  </view>
+</view>

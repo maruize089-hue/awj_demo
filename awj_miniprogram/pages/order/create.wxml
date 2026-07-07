@@ -1,0 +1,87 @@
+<view class="order-create-container">
+  <view class="address-section" bindtap="selectAddress">
+    <view class="address-icon">📍</view>
+    <view class="address-info" wx:if="{{address}}">
+      <view class="address-header">
+        <text class="address-name">{{address.receiver}}</text>
+        <text class="address-phone">{{address.phone}}</text>
+      </view>
+      <text class="address-detail">{{address.province}}{{address.city}}{{address.district}}{{address.detail}}</text>
+    </view>
+    <view class="address-empty" wx:else>
+      <text>请选择收货地址</text>
+    </view>
+    <text class="address-arrow">›</text>
+  </view>
+  
+  <view class="item-section">
+    <view class="item-card" wx:for="{{orderItems}}" wx:key="id">
+      <image class="item-image" src="{{item.image}}" mode="aspectFill" />
+      <view class="item-info">
+        <text class="item-name ellipsis-2">{{item.name}}</text>
+        <text class="item-spec" wx:if="{{item.spec}}">{{item.spec}}</text>
+        <view class="item-bottom">
+          <text class="item-price">{{item.price}}</text>
+          <text class="item-quantity">x{{item.quantity}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="remark-section">
+    <text class="remark-label">订单备注</text>
+    <input class="remark-input" placeholder="请输入订单备注（选填）" bindinput="onRemarkInput" value="{{remark}}" />
+  </view>
+  
+  <view class="service-time-section" wx:if="{{hasService}}">
+    <text class="time-label">预约服务时间</text>
+    <picker mode="date" bindchange="onDateChange" value="{{serviceDate}}">
+      <view class="time-picker">
+        <text>{{serviceDate || '选择日期'}}</text>
+        <text class="picker-arrow">›</text>
+      </view>
+    </picker>
+    <picker mode="time" bindchange="onTimeChange" value="{{serviceTime}}">
+      <view class="time-picker">
+        <text>{{serviceTime || '选择时间'}}</text>
+        <text class="picker-arrow">›</text>
+      </view>
+    </picker>
+  </view>
+  
+  <view class="coupon-section" bindtap="selectCoupon">
+    <text class="coupon-label">优惠券</text>
+    <view class="coupon-info">
+      <text class="coupon-value" wx:if="{{coupon}}">-¥{{coupon.amount}}</text>
+      <text class="coupon-empty" wx:else>暂无可用优惠券</text>
+    </view>
+    <text class="coupon-arrow">›</text>
+  </view>
+  
+  <view class="summary-section">
+    <view class="summary-row">
+      <text class="summary-label">商品金额</text>
+      <text class="summary-value">{{subtotal}}</text>
+    </view>
+    <view class="summary-row" wx:if="{{coupon}}">
+      <text class="summary-label">优惠券</text>
+      <text class="summary-value discount">-¥{{coupon.amount}}</text>
+    </view>
+    <view class="summary-row">
+      <text class="summary-label">运费</text>
+      <text class="summary-value">{{shippingFee}}</text>
+    </view>
+    <view class="summary-row total">
+      <text class="summary-label">实付金额</text>
+      <text class="summary-total">{{totalAmount}}</text>
+    </view>
+  </view>
+  
+  <view class="order-footer">
+    <view class="footer-left">
+      <text class="total-label">合计：</text>
+      <text class="total-price">{{totalAmount}}</text>
+    </view>
+    <button class="submit-btn" bindtap="submitOrder" loading="{{loading}}">提交订单</button>
+  </view>
+</view>

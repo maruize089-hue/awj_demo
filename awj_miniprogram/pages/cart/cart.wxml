@@ -1,0 +1,47 @@
+<view class="cart-container">
+  <view class="cart-list">
+    <view class="cart-item" wx:for="{{cartItems}}" wx:key="id">
+      <view class="checkbox" bindtap="toggleSelect" data-id="{{item.id}}">
+        <text class="checkbox-icon {{item.selected ? 'checked' : ''}}">{{item.selected ? '✓' : ''}}</text>
+      </view>
+      <image class="cart-image" src="{{item.image}}" mode="aspectFill" bindtap="goToDetail" data-id="{{item.productId}}" data-type="{{item.type}}" />
+      <view class="cart-info">
+        <text class="cart-name ellipsis-2">{{item.name}}</text>
+        <text class="cart-spec" wx:if="{{item.spec}}">{{item.spec}}</text>
+        <view class="cart-bottom">
+          <text class="cart-price">{{item.price}}</text>
+          <view class="quantity-control">
+            <text class="qty-btn" bindtap="decreaseQty" data-id="{{item.id}}" wx:if="{{item.quantity > 1}}">-</text>
+            <text class="qty-btn" bindtap="deleteItem" data-id="{{item.id}}" wx:else>删除</text>
+            <text class="qty-num">{{item.quantity}}</text>
+            <text class="qty-btn" bindtap="increaseQty" data-id="{{item.id}}">+</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="empty-cart" wx:if="{{cartItems.length === 0}}">
+      <text class="empty-icon">🛒</text>
+      <text class="empty-text">购物车是空的</text>
+      <button class="go-shopping-btn" bindtap="goShopping">去逛逛</button>
+    </view>
+  </view>
+  
+  <view class="cart-footer" wx:if="{{cartItems.length > 0}}">
+    <view class="footer-left">
+      <view class="checkbox" bindtap="toggleSelectAll">
+        <text class="checkbox-icon {{allSelected ? 'checked' : ''}}">{{allSelected ? '✓' : ''}}</text>
+      </view>
+      <text class="select-all-text">全选</text>
+    </view>
+    <view class="footer-right">
+      <view class="total-price">
+        <text class="total-label">合计：</text>
+        <text class="total-value">{{totalPrice}}</text>
+      </view>
+      <button class="submit-btn" bindtap="submitOrder" disabled="{{selectedCount === 0}}">
+        结算({{selectedCount}})
+      </button>
+    </view>
+  </view>
+</view>

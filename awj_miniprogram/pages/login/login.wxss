@@ -1,0 +1,87 @@
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+  padding: 80rpx 40rpx;
+  box-sizing: border-box;
+}
+
+.logo-area {
+  text-align: center;
+  padding: 80rpx 0;
+}
+
+.logo {
+  width: 160rpx;
+  height: 160rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text {
+  font-size: 48rpx;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.logo-subtitle {
+  display: block;
+  margin-top: 30rpx;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.form-area {
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: #666666;
+  margin-bottom: 15rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 88rpx;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 12rpx;
+  padding: 0 20rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+}
+
+.form-switch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40rpx;
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.login-btn {
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+
+.wx-login-btn {
+  width: 100%;
+}
+
+.tips {
+  text-align: center;
+  margin-top: 40rpx;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.7);
+}

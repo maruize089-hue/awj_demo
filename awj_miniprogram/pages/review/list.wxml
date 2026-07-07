@@ -1,0 +1,24 @@
+<view class="review-list-container">
+  <view class="review-list">
+    <view class="review-item" wx:for="{{reviews}}" wx:key="id">
+      <image class="review-avatar" src="{{review.userAvatar || '/images/default-avatar.png'}}" mode="aspectFill" />
+      <view class="review-content">
+        <view class="review-header">
+          <text class="review-user">{{review.userName}}</text>
+          <text class="review-time">{{review.createTime}}</text>
+        </view>
+        <text class="review-text">{{review.content}}</text>
+        <view class="review-images" wx:if="{{review.images && review.images.length > 0}}">
+          <image class="review-image" wx:for="{{review.images}}" wx:key="index" src="{{item}}" mode="aspectFill" />
+        </view>
+        <view class="review-rating">
+          <text wx:for="5" wx:key="index" class="star-icon">{{index < review.rating ? '★' : '☆'}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="empty-tip" wx:if="{{reviews.length === 0}}">
+      <text>暂无评价</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,35 @@
+<view class="address-edit-container">
+  <view class="form-item">
+    <text class="form-label">收货人</text>
+    <input class="form-input" placeholder="请输入收货人姓名" bindinput="onReceiverInput" value="{{formData.receiver}}" />
+  </view>
+  
+  <view class="form-item">
+    <text class="form-label">手机号</text>
+    <input class="form-input" placeholder="请输入手机号" bindinput="onPhoneInput" value="{{formData.phone}}" />
+  </view>
+  
+  <view class="form-item">
+    <text class="form-label">所在地区</text>
+    <picker mode="region" bindchange="onRegionChange" value="{{region}}">
+      <view class="region-picker">
+        <text>{{regionText || '请选择地区'}}</text>
+        <text class="picker-arrow">›</text>
+      </view>
+    </picker>
+  </view>
+  
+  <view class="form-item">
+    <text class="form-label">详细地址</text>
+    <textarea class="form-textarea" placeholder="请输入详细地址" bindinput="onDetailInput" value="{{formData.detail}}" />
+  </view>
+  
+  <view class="form-item">
+    <view class="default-switch">
+      <text>设为默认地址</text>
+      <switch checked="{{formData.isDefault}}" bindchange="onDefaultChange" />
+    </view>
+  </view>
+  
+  <button class="submit-btn" bindtap="submitForm" loading="{{loading}}">保存地址</button>
+</view>
