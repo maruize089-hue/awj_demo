@@ -877,7 +877,7 @@ new BCryptPasswordEncoder()
 
 ---
 
-**文档版本**: v1.7  
+**文档版本**: v1.8  
 **创建日期**: 2026-07-06  
 **最后更新**: 2026-07-07  
 **适用项目**: 社区服务商城系统
@@ -892,3 +892,4 @@ new BCryptPasswordEncoder()
 - 更新了角色权限矩阵，添加了 `/api/address/**` 和具体的管理端子路径
 - 在订单模块中补充了 `awj_product_order`、`awj_service_order` 表
 - 添加了 `ReviewController` → `EvaluationService` 命名不一致的说明
+- 清理了无效代码：删除了 `JwtAuthenticationTest` 中未使用的字段和方法、`WalletController` 中未使用的 `WalletRecordVo` 内部类、`EvaluationService` 和 `EvaluationServiceImpl` 中未使用的 `createEvaluation` 方法及相关依赖

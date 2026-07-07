@@ -59,12 +59,4 @@ public class WalletController {
     public static class WithdrawDto {
         private java.math.BigDecimal amount;
     }
-
-    @lombok.Data
-    public static class WalletRecordVo {
-        private Long id;
-        private String type;
-        private java.math.BigDecimal amount;
-        private java.time.LocalDateTime createTime;
-    }
 }

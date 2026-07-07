@@ -2,8 +2,14 @@ package com.example.awj.service.impl;
 
 import com.example.awj.dto.EvaluationDto;
 import com.example.awj.dto.PageDto;
-import com.example.awj.entity.*;
-import com.example.awj.mapper.*;
+import com.example.awj.entity.CommunityService;
+import com.example.awj.entity.Evaluation;
+import com.example.awj.entity.Product;
+import com.example.awj.entity.User;
+import com.example.awj.mapper.EvaluationMapper;
+import com.example.awj.mapper.ProductMapper;
+import com.example.awj.mapper.ServiceMapper;
+import com.example.awj.mapper.UserMapper;
 import com.example.awj.service.EvaluationService;
 import com.example.awj.vo.EvaluationVo;
 import com.example.awj.common.result.PageResult;
@@ -19,62 +25,16 @@ import java.util.stream.Collectors;
 public class EvaluationServiceImpl implements EvaluationService {
 
     private final EvaluationMapper evaluationMapper;
-    private final ProductOrderMapper productOrderMapper;
-    private final ServiceOrderMapper serviceOrderMapper;
     private final UserMapper userMapper;
     private final ProductMapper productMapper;
     private final ServiceMapper serviceMapper;
 
-    public EvaluationServiceImpl(EvaluationMapper evaluationMapper, ProductOrderMapper productOrderMapper,
-                                ServiceOrderMapper serviceOrderMapper, UserMapper userMapper,
+    public EvaluationServiceImpl(EvaluationMapper evaluationMapper, UserMapper userMapper,
                                 ProductMapper productMapper, ServiceMapper serviceMapper) {
         this.evaluationMapper = evaluationMapper;
-        this.productOrderMapper = productOrderMapper;
-        this.serviceOrderMapper = serviceOrderMapper;
         this.userMapper = userMapper;
         this.productMapper = productMapper;
         this.serviceMapper = serviceMapper;
-    }
-
-    @Override
-    @Transactional
-    public Evaluation createEvaluation(Long userId, EvaluationDto dto) {
-        Long merchantId = null;
-        Long productId = null;
-        Long serviceId = null;
-        
-        if ("PRODUCT".equals(dto.getOrderType())) {
-            ProductOrder order = productOrderMapper.selectOne(
-                new LambdaQueryWrapper<ProductOrder>().eq(ProductOrder::getOrderNo, dto.getOrderNo()));
-            if (order == null || !order.getUserId().equals(userId)) {
-                throw new RuntimeException("订单不存在");
-            }
-            merchantId = order.getMerchantId();
-            productId = order.getId();
-        } else {
-            ServiceOrder order = serviceOrderMapper.selectOne(
-                new LambdaQueryWrapper<ServiceOrder>().eq(ServiceOrder::getOrderNo, dto.getOrderNo()));
-            if (order == null || !order.getUserId().equals(userId)) {
-                throw new RuntimeException("订单不存在");
-            }
-            merchantId = order.getMerchantId();
-            serviceId = order.getServiceId();
-        }
-        
-        Evaluation evaluation = new Evaluation();
-        evaluation.setOrderNo(dto.getOrderNo());
-        evaluation.setOrderType(dto.getOrderType());
-        evaluation.setUserId(userId);
-        evaluation.setMerchantId(merchantId);
-        evaluation.setProductId(productId);
-        evaluation.setServiceId(serviceId);
-        evaluation.setRating(dto.getRating());
-        evaluation.setContent(dto.getContent());
-        evaluation.setImages(dto.getImages());
-        evaluation.setStatus(1);
-        
-        evaluationMapper.insert(evaluation);
-        return evaluation;
     }
 
     @Override
